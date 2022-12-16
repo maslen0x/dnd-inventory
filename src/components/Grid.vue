@@ -4,12 +4,14 @@ import { useDrawersStore } from '@/store/drawers/drawers.store'
 import { useLocalStorage } from '@/composables/localStorage'
 import { useDragging } from '@/composables/dragging'
 import GridItem from '@/components/GridItem.vue'
+import Drawers from '@/components/Drawers.vue'
+import Drag from '@/components/Drag.vue'
 import { Item } from '@/store/items/items.types'
 
 const itemsStore = useItemsStore()
 const drawersStore = useDrawersStore()
 const storage = useLocalStorage()
-const { onDragStart, onDragEnd, onDrop } = useDragging()
+const { current, coords, onDragStart, onDrag, onDrop } = useDragging()
 
 const openAddDrawer = (number: number) => {
   drawersStore.openDrawer({ name: 'AddItem', data: { number } })
@@ -38,14 +40,21 @@ itemsStore.$subscribe((_, state) => storage.set('items', state.items))
           v-if="itemsStore.getItem(number)"
           :item="itemsStore.getItem(number)"
           :draggable="true"
-          @dragstart="onDragStart(number)"
-          @dragend="onDragEnd"
+          :style="number === current ? { opacity: 0, cursor: 'grabbing' } : {}"
+          @dragstart="onDragStart($event, number)"
+          @drag="onDrag($event)"
           @click.stop="openRemoveDrawer(number, itemsStore.getItem(number))"
         />
       </div>
     </div>
 
-    <div id="drawers" />
+    <Drawers />
+
+    <Drag
+      v-if="current"
+      :color="itemsStore.getItem(current).color"
+      :coords="coords"
+    />
   </div>
 </template>
 

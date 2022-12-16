@@ -30,6 +30,7 @@ const drawersStore = useDrawersStore()
 
 <style scoped lang="sass">
 @import '@/assets/styles/vars'
+
 .drawer
   display: flex
   flex-direction: column

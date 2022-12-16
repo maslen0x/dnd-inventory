@@ -10,22 +10,20 @@ const drawerComponent = computed(() => (
 </script>
 
 <template>
-  <Teleport to="#drawers">
-    <Transition name="slide">
-      <div
-        v-if="drawersStore.drawer"
-        class="drawer"
-      >
-        <Suspense>
-          <component :is="drawerComponent" />
+  <Transition name="slide">
+    <div
+      v-if="drawersStore.drawer"
+      class="drawer"
+    >
+      <Suspense>
+        <component :is="drawerComponent" />
 
-          <template #fallback>
-            Загрузка...
-          </template>
-        </Suspense>
-      </div>
-    </Transition>
-  </Teleport>
+        <template #fallback>
+          Загрузка...
+        </template>
+      </Suspense>
+    </div>
+  </Transition>
 </template>
 
 <style scoped lang="sass">
