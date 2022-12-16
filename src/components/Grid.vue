@@ -1,30 +1,22 @@
+<script setup lang="ts">
+import { useItemsStore } from '@/store/items/items.store'
+import GridItem from '@/components/GridItem.vue'
+
+const itemsStore = useItemsStore()
+</script>
+
 <template>
   <div class="grid">
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
-    <div class="grid__item"></div>
+    <div
+      v-for="index in 25"
+      :key="index"
+      class="grid__item"
+    >
+      <GridItem
+        v-if="itemsStore.getItem(index - 1)"
+        :item="itemsStore.getItem(index - 1)"
+      />
+    </div>
   </div>
 </template>
 
