@@ -33,6 +33,13 @@ export const useItemsStore = defineStore('items', {
         item.count -= count
       }
       storage.set('items', this.items)
+    },
+
+    replace(from: number, to: number) {
+      if(this.items[to]) return
+      this.items[to] = this.items[from]
+      delete this.items[from]
+      storage.set('items', this.items)
     }
   }
 })

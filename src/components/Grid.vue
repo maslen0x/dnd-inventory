@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { useItemsStore } from '@/store/items/items.store'
 import { useDrawersStore } from '@/store/drawers/drawers.store'
+import { useDragging } from '@/composables/dragging'
 import GridItem from '@/components/GridItem.vue'
 import { Item } from '@/store/items/items.types'
 
 const itemsStore = useItemsStore()
 const drawersStore = useDrawersStore()
+const { onDragStart, onDragEnd, onDrop } = useDragging()
 
 const openAddDrawer = (number: number) => {
   drawersStore.openDrawer({ name: 'AddItem', data: { number } })
@@ -23,12 +25,18 @@ const openRemoveDrawer = (number: number, item: Item) => {
         v-for="number in 25"
         :key="number"
         class="grid__item"
-        @click="openAddDrawer(number - 1)"
+        @click="openAddDrawer(number)"
+        @drop="onDrop(number)"
+        @dragenter.prevent
+        @dragover.prevent
       >
         <GridItem
-          v-if="itemsStore.getItem(number - 1)"
-          :item="itemsStore.getItem(number - 1)"
-          @click.stop="openRemoveDrawer(number - 1, itemsStore.getItem(number - 1))"
+          v-if="itemsStore.getItem(number)"
+          :item="itemsStore.getItem(number)"
+          :draggable="true"
+          @dragstart="onDragStart(number)"
+          @dragend="onDragEnd"
+          @click.stop="openRemoveDrawer(number, itemsStore.getItem(number))"
         />
       </div>
     </div>
