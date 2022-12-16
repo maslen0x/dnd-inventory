@@ -1,46 +1,51 @@
+import { reactive, watch } from 'vue'
 import { defineStore } from 'pinia'
 import colors from '@/data/colors.json'
-import { useLocalStorage } from '@/composables/localStorage'
+import { useStorage } from '@/composables/storage'
 import { getRandom } from '@/utils/misc'
-import { ItemsStore } from './items.types'
+import { Item } from './items.types'
 
-const storage = useLocalStorage()
+export const useItemsStore = defineStore('items', () => {
+  const storage = useStorage()
 
-export const useItemsStore = defineStore('items', {
-  state: () => ({
-    items: storage.get('items') ?? {}
-  } as ItemsStore),
+  const items = reactive<Record<number, Item>>(storage.get('items') ?? {})
 
-  getters: {
-    getItem: state => (number: number) => state.items[number]
-  },
+  const getItem = (number: number) => items[number]
 
-  actions: {
-    add(number: number, count: number) {
-      this.items[number] = {
-        id: Date.now(),
-        count,
-        color: colors[getRandom(colors.length)],
-      }
-    },
-
-    remove(number: number, count: number) {
-      const item = this.items[number]
-      if(item.count <= count) {
-        delete this.items[number]
-      } else {
-        item.count -= count
-      }
-    },
-
-    replace(from: number, to: number) {
-      const temp = this.items[to]
-      this.items[to] = this.items[from]
-      if(temp) {
-        this.items[from] = temp
-      } else {
-        delete this.items[from]
-      }
+  const add = (number: number, count: number) => {
+    items[number] = {
+      id: Date.now(),
+      count,
+      color: colors[getRandom(colors.length)]
     }
+  }
+
+  const remove = (number: number, count: number) => {
+    const item = items[number]
+    if(item.count <= count) {
+      delete items[number]
+    } else {
+      item.count -= count
+    }
+  }
+
+  const replace = (from: number, to: number) => {
+    const temp = items[to]
+    items[to] = items[from]
+    if(temp) {
+      items[from] = temp
+    } else {
+      delete items[from]
+    }
+  }
+
+  watch(items, value => storage.set('items', value))
+
+  return {
+    items,
+    getItem,
+    add,
+    remove,
+    replace
   }
 })

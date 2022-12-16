@@ -1,18 +1,17 @@
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { Drawer, DrawersStore } from './drawers.types'
+import { Drawer } from './drawers.types'
 
-export const useDrawersStore = defineStore('drawers', {
-  state: () => ({
-    drawer: null
-  } as DrawersStore),
+export const useDrawersStore = defineStore('drawers', () => {
+  const drawer = ref<Drawer | null>(null)
 
-  actions: {
-    openDrawer(drawer: Drawer) {
-      this.drawer = drawer
-    },
+  const openDrawer = (value: Drawer) => drawer.value = value
 
-    closeDrawer() {
-      this.drawer = null
-    }
+  const closeDrawer = () => drawer.value = null
+
+  return {
+    drawer,
+    openDrawer,
+    closeDrawer
   }
 })

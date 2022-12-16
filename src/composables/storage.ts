@@ -1,4 +1,4 @@
-export const useLocalStorage = (prefix: string = 'inventory') => {
+export const useStorage = (prefix: string = 'inventory') => {
   const get = <T = string>(key: string): T | null => {
     try {
       return JSON.parse(localStorage.getItem(`${prefix}:${key}`) || 'null')

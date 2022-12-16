@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useItemsStore } from '@/store/items/items.store'
 import { useDrawersStore } from '@/store/drawers/drawers.store'
-import { useLocalStorage } from '@/composables/localStorage'
 import { useDragging } from '@/composables/dragging'
 import GridItem from '@/components/GridItem.vue'
 import Drawers from '@/components/Drawers.vue'
@@ -10,7 +9,6 @@ import { Item } from '@/store/items/items.types'
 
 const itemsStore = useItemsStore()
 const drawersStore = useDrawersStore()
-const storage = useLocalStorage()
 const { current, coords, onDragStart, onDrag, onDrop } = useDragging()
 
 const openAddDrawer = (number: number) => {
@@ -20,8 +18,6 @@ const openAddDrawer = (number: number) => {
 const openRemoveDrawer = (number: number, item: Item) => {
   drawersStore.openDrawer({ name: 'RemoveItem', data: { number, item } })
 }
-
-itemsStore.$subscribe((_, state) => storage.set('items', state.items))
 </script>
 
 <template>

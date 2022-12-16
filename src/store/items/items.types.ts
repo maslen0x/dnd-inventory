@@ -3,7 +3,3 @@ export interface Item {
   count: number
   color: string
 }
-
-export interface ItemsStore {
-  items: Record<number, Item>
-}
