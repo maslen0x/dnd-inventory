@@ -1,37 +1,56 @@
 <script setup lang="ts">
 import { useItemsStore } from '@/store/items/items.store'
+import { useDrawersStore } from '@/store/drawers/drawers.store'
 import GridItem from '@/components/GridItem.vue'
+import { Item } from '@/store/items/items.types'
 
 const itemsStore = useItemsStore()
+const drawersStore = useDrawersStore()
+
+const openAddDrawer = (number: number) => {
+  drawersStore.openDrawer({ name: 'AddItem', data: { number } })
+}
+
+const openRemoveDrawer = (number: number, item: Item) => {
+  drawersStore.openDrawer({ name: 'RemoveItem', data: { number, item } })
+}
 </script>
 
 <template>
-  <div class="grid">
-    <div
-      v-for="index in 25"
-      :key="index"
-      class="grid__item"
-    >
-      <GridItem
-        v-if="itemsStore.getItem(index - 1)"
-        :item="itemsStore.getItem(index - 1)"
-      />
+  <div class="wrapper">
+    <div class="grid">
+      <div
+        v-for="number in 25"
+        :key="number"
+        class="grid__item"
+        @click="openAddDrawer(number - 1)"
+      >
+        <GridItem
+          v-if="itemsStore.getItem(number - 1)"
+          :item="itemsStore.getItem(number - 1)"
+          @click.stop="openRemoveDrawer(number - 1, itemsStore.getItem(number - 1))"
+        />
+      </div>
     </div>
+
+    <div id="drawers" />
   </div>
 </template>
 
 <style scoped lang="sass">
 @import '@/assets/styles/vars'
 
+.wrapper
+  position: relative
+  border: 1px solid $light
+  border-radius: $border-radius
+  overflow: hidden
+
 .grid
-  height: 100%
   display: grid
   grid-template-columns: repeat(5, 100px)
   grid-template-rows: repeat(5, 100px)
   background-color: $dark
-  border: 1px solid $light
-  border-radius: $border-radius
-  overflow: hidden
 
   &__item
     &:not(:nth-child(5n))

@@ -6,6 +6,7 @@ import Grid from '@/components/Grid.vue'
 import Sidebar from '@/components/Sidebar.vue'
 import Skeleton from '@/components/Skeleton.vue'
 import Alert from '@/components/Alert.vue'
+import Drawers from '@/components/Drawers.vue'
 
 const alertVisible = ref(true)
 </script>
@@ -26,4 +27,6 @@ const alertVisible = ref(true)
       </template>
     </Layout>
   </Container>
+
+  <Drawers />
 </template>

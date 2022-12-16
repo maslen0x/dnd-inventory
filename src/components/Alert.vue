@@ -3,7 +3,7 @@ import Close from '@/components/icons/Close.vue'
 
 defineProps<{
   modelValue: boolean
-}>();
+}>()
 
 defineEmits<{
   (event: 'update:modelValue', value: boolean): void

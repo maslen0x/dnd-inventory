@@ -22,6 +22,7 @@ export const useItemsStore = defineStore('items', {
         count,
         color: colors[getRandom(colors.length)],
       }
+      storage.set('items', this.items)
     },
 
     remove(number: number, count: number) {
@@ -31,6 +32,7 @@ export const useItemsStore = defineStore('items', {
       } else {
         item.count -= count
       }
+      storage.set('items', this.items)
     }
   }
 })
