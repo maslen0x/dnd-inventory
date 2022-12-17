@@ -59,20 +59,20 @@ const openRemoveDrawer = (number: number, item: Item) => {
 
 .wrapper
   position: relative
-  border: 1px solid $light
-  border-radius: $border-radius
+  border: 1px solid var(--secondary)
+  border-radius: var(--border-radius)
   overflow: hidden
 
 .grid
   display: grid
   grid-template-columns: repeat(5, 100px)
   grid-template-rows: repeat(5, 100px)
-  background-color: $dark
+  background-color: var(--primary)
 
   &__item
     &:not(:nth-child(5n))
-      border-right: 1px solid $light
+      border-right: 1px solid var(--secondary)
 
     &:not(:nth-last-child(-n + 5))
-      border-bottom: 1px solid $light
+      border-bottom: 1px solid var(--secondary)
 </style>

@@ -67,7 +67,7 @@ const onSubmit = (value: string) => {
   justify-content: center
   width: 100%
   padding: 55px 0
-  border-bottom: 1px solid $light
+  border-bottom: 1px solid var(--secondary)
 
 .title
   margin-bottom: 24px

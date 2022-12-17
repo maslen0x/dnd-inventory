@@ -34,7 +34,7 @@ const size = computed(() => `skeleton--${props.size}`)
   align-items: center
 
   &__item
-    background: $gradient
+    background: var(--gradient)
 
     &:not(:last-child)
       margin-bottom: 16px

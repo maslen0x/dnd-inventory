@@ -58,5 +58,5 @@ const drawersStore = useDrawersStore()
 
   &__footer
     padding: 16px
-    border-top: 1px solid $light
+    border-top: 1px solid var(--secondary)
 </style>

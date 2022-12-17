@@ -36,9 +36,9 @@ import { getImageUrl } from '@/utils/misc'
   height: 100%
   display: flex
   flex-direction: column
-  background-color: $dark
-  border: 1px solid $light
-  border-radius: $border-radius
+  background-color: var(--primary)
+  border: 1px solid var(--secondary)
+  border-radius: var(--border-radius)
   padding: 16px
 
   &__img

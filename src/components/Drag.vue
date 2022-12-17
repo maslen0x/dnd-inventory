@@ -11,7 +11,7 @@ defineProps<{
 </script>
 
 <template>
-  <Teleport to="body">
+  <Teleport to="#page">
     <div
       class="drag"
       :style="{ transform: `translate(${coords.x}px, ${coords.y}px)` }"
@@ -32,7 +32,7 @@ defineProps<{
   display: flex
   justify-content: center
   align-items: center
-  background-color: $dark
-  border: 1px solid $light
+  background-color: var(--primary)
+  border: 1px solid var(--secondary)
   border-radius: 24px
 </style>

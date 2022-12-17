@@ -35,6 +35,6 @@ const drawerComponent = computed(() => (
   right: 0
   width: 250px
   height: 100%
-  background-color: $dark
-  border-left: 1px solid $light
+  background-color: var(--primary)
+  border-left: 1px solid var(--secondary)
 </style>

@@ -25,7 +25,7 @@ defineEmits<{
 
 .input
   height: 40px
-  border: 1px solid $light
+  border: 1px solid var(--secondary)
   border-radius: 4px
   padding: 0 12px
   background-color: transparent

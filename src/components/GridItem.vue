@@ -38,8 +38,8 @@ defineProps<{ item: Item }>()
   height: 16px
   font-size: 10px
   padding: 0 4px
-  border-top: 1px solid $light
-  border-left: 1px solid $light
+  border-top: 1px solid var(--secondary)
+  border-left: 1px solid var(--secondary)
   border-radius: 6px 0 0 0
 
   &__number

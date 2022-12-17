@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import Close from '@/components/icons/Close.vue'
 
-defineProps<{
-  modelValue: boolean
-}>()
+defineProps<{ modelValue: boolean }>()
 
 defineEmits<{
   (event: 'update:modelValue', value: boolean): void
@@ -32,9 +30,9 @@ defineEmits<{
 .alert
   position: relative
   min-height: 42px
-  background-color: $dark
-  border: 1px solid $light
-  border-radius: $border-radius
+  background-color: var(--primary)
+  border: 1px solid var(--secondary)
+  border-radius: var(--border-radius)
   padding: 16px
   padding-right: 42px
 
